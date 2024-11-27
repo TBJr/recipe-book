@@ -28,16 +28,30 @@ def index():
 def add_recipe():
     if request.method == 'POST':
         new_recipe = {
-            "name": request.form['name'],
-            "description": request.form['description']
+            'name': request.form['name'],
+            'description': request.form['description']
         }
-        with open('recipes.json', 'r+') as f:
-            recipes = json.load(f)
-            recipes.append(new_recipe)
-            f.seek(0)
-            json.dump(recipes, f)
+        recipes = load_recipes()
+        recipes.append(new_recipe)
+        save_recipes(recipes)
         return redirect(url_for('index'))
+
     return render_template('add_recipe.html')
+
+# @app.route('/add', methods=['GET', 'POST'])
+# def add_recipe():
+#     if request.method == 'POST':
+#         new_recipe = {
+#             "name": request.form['name'],
+#             "description": request.form['description']
+#         }
+#         with open('recipes.json', 'r+') as f:
+#             recipes = json.load(f)
+#             recipes.append(new_recipe)
+#             f.seek(0)
+#             json.dump(recipes, f)
+#         return redirect(url_for('index'))
+#     return render_template('add_recipe.html')
 
 @app.route('/edit/<int:recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):
