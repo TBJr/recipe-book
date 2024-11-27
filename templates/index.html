@@ -13,9 +13,14 @@
             <input type="text" name="query" placeholder="Search recipes..." required>
             <button type="submit">Search</button>
         </form>
+
         <ul>
             {% for recipe in recipes %}
-                <li>{{ recipe.name }}: {{ recipe.description }}</li>
+                <li>
+                    {{ recipe.name }}: {{ recipe.description }}
+                    <a href="{{ url_for('edit_recipe', recipe_id=loop.index0) }}">Edit</a>
+                    <a href="{{ url_for('delete_recipe', recipe_id=loop.index0) }}">Delete</a>
+                </li>
             {% endfor %}
         </ul>
     </body>
