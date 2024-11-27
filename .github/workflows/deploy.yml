@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -25,12 +27,14 @@ jobs:
       - name: Build the project
         run: |
           mkdir -p build
-          cp -r templates build/
+          cp -r templates/* build/  # Copy all files from templates to build
           cp -r static build/
           cp recipes.json build/
+          mv build/index.html build/index.html  # Ensure index.html is in the root of build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          publish_branch: gh-pages
