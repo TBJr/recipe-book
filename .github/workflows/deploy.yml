@@ -30,7 +30,7 @@ jobs:
           cp -r templates/* build/  # Copy all files from templates to build
           cp -r static build/
           cp recipes.json build/
-          mv build/index.html build/index.html  # Ensure index.html is in the root of build
+          # No need to move index.html as it should already be in the build directory
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
