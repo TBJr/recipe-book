@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>Add Recipe</title>
+    </head>
+
+    <body>
+        <h1>Add a New Recipe</h1>
+        <form method="POST">
+            <label for="name">Recipe Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+            <button type="submit">Add Recipe</button>
+        </form>
+        <a href="{{ url_for('index') }}">Back to Recipe Book</a>
+    </body>
+</html>
