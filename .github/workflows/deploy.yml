@@ -24,13 +24,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Render templates
+        run: |
+          python render_templates.py  # Add this step to render templates
+
       - name: Build the project
         run: |
           mkdir -p build
-          cp -r templates/* build/  # Copy all files from templates to build
           cp -r static build/
           cp recipes.json build/
-          # No need to move index.html as it should already be in the build directory
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
